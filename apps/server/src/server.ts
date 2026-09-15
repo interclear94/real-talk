@@ -1,14 +1,20 @@
-import express, { Request, Response } from "express";
+import app from "./app";
+import { sequelize } from "./db/db";
 
-const app = express();
-const port = 3000;
+const PORT = 4000;
 
-app.use(express.json());
+export const bootStrap = async () => {
+  try {
+    await sequelize.authenticate();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello TypeScript + Express + pnpm!");
-});
+    app.listen(PORT, () => {
+      console.log(`Server is running at http://localhost:${PORT}`);
+    });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+    console.log("Connection has been established successfully.");
+  } catch (err) {
+    console.error("Connection failed", err);
+  }
+};
+
+bootStrap();
