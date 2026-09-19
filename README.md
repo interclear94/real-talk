@@ -34,6 +34,7 @@
 ### Back
 
 - Node.js
+- Express
 - Sequelize
 - TypeScript
 

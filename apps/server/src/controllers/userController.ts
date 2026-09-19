@@ -3,7 +3,7 @@ import { signup } from "../services/userService";
 import { badRequest } from "../utils/err/AppError";
 
 export const signupController = async (req: Request, res: Response) => {
-  const { user_id, password, nickname } = req.body;
+  const { userId, password, nickname } = req.body;
 
   /**
    * user_id validation
@@ -11,7 +11,7 @@ export const signupController = async (req: Request, res: Response) => {
    */
   const idRegex = /^[a-zA-Z0-9]{6,20}$/;
 
-  if (!idRegex.test(user_id)) {
+  if (!idRegex.test(userId)) {
     throw badRequest(
       "아이디는 영문과 숫자를 포함하여 6자 이상 20자 이하이어야 합니다.",
     );
@@ -31,7 +31,7 @@ export const signupController = async (req: Request, res: Response) => {
   }
 
   const result = await signup({
-    user_id,
+    user_id: userId,
     password,
     nickname,
   });
